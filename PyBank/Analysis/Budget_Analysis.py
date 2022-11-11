@@ -14,7 +14,7 @@ with open(BankCSV, encoding='utf-8') as csvfile:
     header = next(csvreader)                        #CSVFile has a Header
     for row in csvreader:
         M.append(row[0])
-        PL.append(row[1])
+        PL.append(int(row[1]))
 
 PLdiff = []
 for a, b in zip(PL[0::], PL[1::]):      #Creates a new list for in >change< in PL
@@ -33,10 +33,10 @@ for _ in PLdiff:                #Circles through Dif
         PLLi = PLdiff.index(_)  #..Set Variable to Current Val's index
 
 Line1 = "\nFinancial Analysis" + '\n' + "-------------------------" + '\n' + "Total Months: {}\n".format(len(M))
-Line2 = "Total P/L: ${}\n".format(len(PL))
+Line2 = "Total P/L: ${}\n".format(sum(PL))
 Line3 = "Average Change: ${}\n".format(round(float(PLdiffAvg), 2))
 Line4 = "Greatest Increase in Profits: {} (${})\n".format(M[PLMi+1], PLH)
-Line5 = "Greatest Decrease in Profits:{} (${}) \n".format(M[PLLi+1], PLL)
+Line5 = "Greatest Decrease in Profits: {} (${}) \n".format(M[PLLi+1], PLL)
 
 print(Line1 + Line2 + Line3 + Line4 + Line5)
 
